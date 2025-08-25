@@ -1,6 +1,3 @@
-# Sodimac-Orders
-# ORDERS-SODIMAC
-
 # Sodimac Orders API
 
 ## Descripción
