@@ -1,0 +1,194 @@
+<div class="container">
+  <div class="header">
+    <h1>✨ {{ isEditMode ? 'Editar Pedido' : 'Crear Nuevo Pedido' }}</h1>
+    <p>Completa la información para generar tu pedido</p>    
+  <!-- Botones de acción -->
+  <div class="header-actions">
+    <button class="btn btn-primary me-2" (click)="irAFormulario()">
+      ➕ Listados Pedidos
+    </button>
+    <button class="btn btn-info me-2" (click)="irADashboard()">
+      📊 Dashboard
+    </button>
+    <button class="btn btn-danger" (click)="logout()">
+      🚪 Cerrar Sesión
+    </button>
+  </div>
+</div>
+  
+  <div class="form-content">
+    <!-- Alertas -->
+    <div class="alert alert-success" *ngIf="success" [class.show]="success">
+      <span>✓</span>
+      <span>{{ success }}</span>
+    </div>
+    
+    <div class="alert alert-error" *ngIf="error" [class.show]="error">
+      <span>⚠</span>
+      <span>{{ error }}</span>
+    </div>
+
+    <form [formGroup]="pedidoForm" (ngSubmit)="onSubmit()">
+      <!-- Información General -->
+      <div class="section">
+        <h2 class="section-title">
+          <span class="section-icon">👤</span>
+          Información General
+        </h2>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="cliente" class="required">Cliente</label>
+            <select formControlName="cliente_id" class="form-input">
+              <option value="">Seleccione un cliente</option>
+              <option *ngFor="let cliente of clientes" [value]="cliente.id">
+                {{ cliente.nombre }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="ruta" class="required">Ruta de Entrega</label>
+            <select formControlName="ruta_id" class="form-input">
+              <option value="">Seleccione una ruta</option>
+              <option *ngFor="let ruta of rutas" [value]="ruta.id">
+                {{ ruta.nombre_ruta }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="fechaEntrega" class="required">Fecha de Entrega</label>
+            <input 
+              type="datetime-local" 
+              formControlName="fecha_entrega" 
+              class="form-input"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="estado">Estado del Pedido</label>
+            <select formControlName="estado_pedido" class="form-input">
+              <option value="Pendiente">Pendiente</option>
+              <option value="En Proceso">En Proceso</option>
+              <option value="Entregado">Entregado</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="observaciones">Observaciones</label>
+            <textarea 
+              formControlName="observaciones" 
+              class="form-input"
+              placeholder="Notas adicionales, instrucciones especiales..."
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Productos -->
+      <div class="section">
+        <h2 class="section-title">
+          <span class="section-icon">📦</span>
+          Productos del Pedido
+        </h2>
+        
+        <div class="productos-section">
+          <div formArrayName="productos">
+            <div 
+              *ngFor="let producto of productosFormArray.controls; let i = index" 
+              [formGroupName]="i"
+              class="producto-card"
+            >
+              <div class="producto-header">
+                <div class="producto-numero">{{ i + 1 }}</div>
+                <button 
+                  type="button" 
+                  class="remove-btn"
+                  (click)="removerProducto(i)"
+                  *ngIf="productosFormArray.length > 1"
+                >
+                  ×
+                </button>
+              </div>
+              
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="required">Producto</label>
+                  <select 
+                    formControlName="producto_id"
+                    class="form-input"
+                    (change)="onProductoChange(i)"
+                  >
+                    <option value="">Seleccione un producto</option>
+                    <option *ngFor="let prod of productos" [value]="prod.id">
+                      {{ prod.nombre_producto }} - ${{ prod.precio_unitario | number:'1.2-2' }}
+                    </option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label class="required">Cantidad</label>
+                  <input 
+                    type="number" 
+                    formControlName="cantidad"
+                    class="form-input"
+                    min="1" 
+                    (input)="calcularSubtotal(i)"
+                  />
+                </div>
+                
+                <div class="form-group">
+                  <label class="required">Precio Unitario</label>
+                  <input 
+                    type="number" 
+                    formControlName="precio_unitario"
+                    class="form-input"
+                    step="0.01" 
+                    min="0.01"
+                    (input)="calcularSubtotal(i)"
+                  />
+                </div>
+              </div>
+              
+              <div class="subtotal-display">
+                <div class="subtotal-label">Subtotal</div>
+                <div class="subtotal-amount">${{ calcularSubtotal(i) | number:'1.2-2' }}</div>
+              </div>
+            </div>
+          </div>
+          
+          <button type="button" class="add-producto-btn" (click)="agregarProducto()">
+            <span>+</span>
+            Agregar Producto
+          </button>
+        </div>
+      </div>
+
+      <!-- Total -->
+      <div class="total-section">
+        <div class="total-label">Total del Pedido</div>
+        <div class="total-amount">${{ calcularTotal() | number:'1.2-2' }}</div>
+      </div>
+
+      <!-- Acciones -->
+      <div class="form-actions">
+        <button 
+          type="submit" 
+          class="btn btn-primary" 
+          [disabled]="pedidoForm.invalid || loading"
+        >
+          {{ loading ? 'Guardando...' : 'Guardar Pedido' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Loading overlay -->
+  <div class="loading" *ngIf="loading" [class.show]="loading">
+    <div class="spinner"></div>
+  </div>
+</div>

@@ -1,0 +1,239 @@
+<div class="dashboard-container">
+    <!-- Header -->
+    <div class="dashboard-header">
+        <h1 class="dashboard-title">Dashboard de Entregas</h1>
+        <button class="reload-btn" (click)="recargar()" [disabled]="cargando">
+            {{ cargando ? 'Cargando...' : 'Actualizar' }}
+        </button>
+    </div>
+    
+    <!-- Botones de acción -->
+    <div class="header-actions">
+        <button class="btn btn-primary me-2" (click)="irAFormulario()">
+            ➕ Listados Pedidos
+        </button>
+        <button class="btn btn-danger" (click)="logout()">
+            🚪 Cerrar Sesión
+        </button>
+        <button (click)="exportarAExcel()" [disabled]="cargando">Descargar Excel</button>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="cargando" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Cargando datos del dashboard...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error && !cargando" class="error-container">
+        <h3>⚠️ Error al cargar datos</h3>
+        <p>{{ error }}</p>
+        <button class="reload-btn" (click)="recargar()">Reintentar</button>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div *ngIf="!cargando && !error && dashboardData">
+        <!-- Statistics Cards -->
+        <div class="stats-grid">
+            <div class="stat-card pendientes">
+                <div class="stat-header">
+                    <h3 class="stat-title">Entregas Pendientes</h3>
+                    <span class="stat-icon">📦</span>
+                </div>
+                <div class="stat-value">{{ estadisticasPendientes?.total_pendientes || 0 }}</div>
+                <p class="stat-subtitle">
+                    Valor total: {{ formatearMoneda(estadisticasPendientes?.valor_total_pendiente || 0) }}
+                </p>
+            </div>
+
+            <div class="stat-card completadas">
+                <div class="stat-header">
+                    <h3 class="stat-title">Entregas Completadas</h3>
+                    <span class="stat-icon">✅</span>
+                </div>
+                <div class="stat-value">{{ estadisticasCompletadas?.total_completadas || 0 }}</div>
+                <p class="stat-subtitle">
+                    Valor entregado: {{ formatearMoneda(estadisticasCompletadas?.valor_total_entregado || 0) }}
+                </p>
+            </div>
+
+            <div class="stat-card urgentes">
+                <div class="stat-header">
+                    <h3 class="stat-title">Entregas Urgentes</h3>
+                    <span class="stat-icon">🚨</span>
+                </div>
+                <div class="stat-value">{{ estadisticasPendientes?.entregas_urgentes || 0 }}</div>
+                <p class="stat-subtitle">Para hoy y mañana</p>
+            </div>
+
+            <div class="stat-card valor">
+                <div class="stat-header">
+                    <h3 class="stat-title">Promedio por Entrega</h3>
+                    <span class="stat-icon">💰</span>
+                </div>
+                <div class="stat-value" style="font-size: 20px;">
+                    {{ formatearMoneda(estadisticasCompletadas?.promedio_valor_por_entrega || 0) }}
+                </div>
+                <p class="stat-subtitle">Valor promedio completadas</p>
+            </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="content-grid">
+            <!-- Entregas Urgentes -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">🚨 Entregas Urgentes</h3>
+                    <span class="badge urgente">{{ entregasUrgentes.length }} pendientes</span>
+                </div>
+
+                <div *ngIf="entregasUrgentes.length === 0" class="empty-state">
+                    <div class="empty-icon">🎉</div>
+                    <p>No hay entregas urgentes</p>
+                </div>
+
+                <div *ngFor="let entrega of entregasUrgentes" 
+                     class="entrega-item" 
+                     [ngClass]="getClasePrioridad(entrega.dias_para_entrega)">
+                    <div class="entrega-header">
+                        <span class="cliente-nombre">{{ entrega.nombre_cliente }}</span>
+                        <span class="entrega-valor">{{ formatearMoneda(entrega.valor_total) }}</span>
+                    </div>
+                    <div class="entrega-details">
+                        <div>📍 {{ entrega.direccion_entrega }}</div>
+                        <div class="ruta-badge">{{ entrega.nombre_ruta }}</div>
+                    </div>
+                    <div class="entrega-fecha">
+                        <span class="fecha-texto">
+                            📅 {{ formatearFecha(entrega.fecha_entrega) }} - {{ formatearHora(entrega.fecha_entrega) }}
+                        </span>
+                        <span class="tiempo-restante badge" [ngClass]="getClasePrioridad(entrega.dias_para_entrega)">
+                            {{ getTextoTiempo(entrega.dias_para_entrega) }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Próximas Entregas -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">📅 Próximas Entregas</h3>
+                    <span class="badge media">{{ proximasEntregas.length }} programadas</span>
+                </div>
+
+                <div *ngIf="proximasEntregas.length === 0" class="empty-state">
+                    <div class="empty-icon">📭</div>
+                    <p>No hay entregas programadas</p>
+                </div>
+
+                <div *ngFor="let entrega of proximasEntregas" 
+                     class="entrega-item" 
+                     [ngClass]="getClasePrioridad(entrega.dias_para_entrega)">
+                    <div class="entrega-header">
+                        <span class="cliente-nombre">{{ entrega.nombre_cliente }}</span>
+                        <span class="entrega-valor">{{ formatearMoneda(entrega.valor_total) }}</span>
+                    </div>
+                    <div class="entrega-details">
+                        <div>📍 {{ entrega.direccion_entrega }}</div>
+                        <div class="ruta-badge">{{ entrega.nombre_ruta }}</div>
+                    </div>
+                    <div class="entrega-fecha">
+                        <span class="fecha-texto">
+                            📅 {{ formatearFecha(entrega.fecha_entrega) }} - {{ formatearHora(entrega.fecha_entrega) }}
+                        </span>
+                        <span class="tiempo-restante badge" [ngClass]="getClasePrioridad(entrega.dias_para_entrega)">
+                            {{ getTextoTiempo(entrega.dias_para_entrega) }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Entregas Completadas Recientes -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">✅ Entregas Completadas</h3>
+                    <span class="badge completadas">{{ ultimasCompletadas.length }} recientes</span>
+                </div>
+
+                <div *ngIf="ultimasCompletadas.length === 0" class="empty-state">
+                    <div class="empty-icon">📝</div>
+                    <p>No hay entregas completadas recientes</p>
+                </div>
+
+                <div *ngFor="let entrega of ultimasCompletadas" class="entrega-item completada">
+                    <div class="entrega-header">
+                        <span class="cliente-nombre">{{ entrega.nombre_cliente }}</span>
+                        <span class="entrega-valor">{{ formatearMoneda(entrega.valor_total) }}</span>
+                    </div>
+                    <div class="entrega-details">
+                        <div>📍 {{ entrega.direccion_entrega }}</div>
+                        <div style="margin-top: 5px;">
+                            <span class="ruta-badge">{{ entrega.nombre_ruta }}</span>
+                            <span style="margin-left: 10px; font-size: 12px; color: #666;">
+                                {{ entrega.total_productos }} productos ({{ entrega.total_items }} items)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="entrega-fecha">
+                        <span class="fecha-texto">
+                            📅 {{ formatearFecha(entrega.fecha_entrega) }} - {{ formatearHora(entrega.fecha_entrega) }}
+                        </span>
+                        <span class="tiempo-restante badge completadas">Completada</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen Estadístico -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">📊 Resumen General</h3>
+                    <span class="badge valor">Estadísticas</span>
+                </div>
+                
+                <div style="display: grid; gap: 15px;">
+                    <div style="padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                        <div style="font-weight: 600; color: #333; margin-bottom: 5px;">Total de Entregas</div>
+                        <div style="font-size: 24px; font-weight: 700; color: #2c5aa0;">
+                            {{ dashboardData.resumenGeneral.total_entregas }}
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                        <div style="font-weight: 600; color: #333; margin-bottom: 5px;">Valor Total Gestionado</div>
+                        <div style="font-size: 18px; font-weight: 700; color: #2c5aa0;">
+                            {{ formatearMoneda(dashboardData.resumenGeneral.total_valor) }}
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                        <div style="font-weight: 600; color: #333; margin-bottom: 5px;">Entregas para Hoy</div>
+                        <div style="font-size: 24px; font-weight: 700; color: #f44336;">
+                            {{ dashboardData.resumenGeneral.entregas_hoy }}
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                        <div style="font-weight: 600; color: #333; margin-bottom: 5px;">Entregas Esta Semana</div>
+                        <div style="font-size: 24px; font-weight: 700; color: #ff9800;">
+                            {{ dashboardData.resumenGeneral.entregas_esta_semana }}
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                        <div style="font-weight: 600; color: #333; margin-bottom: 5px;">Próximas 3 Días</div>
+                        <div style="font-size: 24px; font-weight: 700; color: #4caf50;">
+                            {{ estadisticasPendientes?.entregas_proximas || 0 }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paginación -->
+        <div class="pagination">
+            <button (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 1">Anterior</button>
+            <span>Página {{ paginaActual }}</span>
+            <button (click)="cambiarPagina(paginaActual + 1)" [disabled]="(paginaActual * tamanoPorPagina) >= totalRegistros">Siguiente</button>
+        </div>
+    </div>
+</div>

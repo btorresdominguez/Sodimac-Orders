@@ -1,0 +1,526 @@
+{
+    "info": {
+        "_postman_id": "sodimac-pedidos-collection",
+        "name": "Sodimac Orders API",
+        "description": "Postman collection for testing Sodimac Orders API endpoints related to Pedidos, Clientes, RutasEntrega, and Productos.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Clientes",
+            "item": [
+                {
+                    "name": "Obtener Todos los Clientes",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/clientes",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "clientes"]
+                        },
+                        "description": "Obtiene todos los clientes."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Obtener Cliente por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/clientes/{{clienteId}}",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "clientes", "{{clienteId}}"]
+                        },
+                        "description": "Obtiene un cliente específico por su ID."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Crear Nuevo Cliente",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/clientes",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "clientes"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"nombre\":\"Nuevo Cliente\",\"direccion\":\"Calle Ejemplo 123\",\"email\":\"nuevo.cliente@email.com\"}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "description": "Crea un nuevo cliente."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Eliminar Cliente",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/clientes/{{clienteId}}",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "clientes", "{{clienteId}}"]
+                        },
+                        "description": "Elimina un cliente específico por su ID."
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Rutas de Entrega",
+            "item": [
+                {
+                    "name": "Obtener Todas las Rutas",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/rutas",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "rutas"]
+                        },
+                        "description": "Obtiene todas las rutas de entrega."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Crear Nueva Ruta",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/rutas",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "rutas"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"nombre_ruta\":\"Ruta Norte Bogotá\",\"estado\":\"Activa\",\"capacidad_maxima\":30}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "description": "Crea una nueva ruta de entrega."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Eliminar Ruta",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/rutas/{{rutaId}}",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "rutas", "{{rutaId}}"]
+                        },
+                        "description": "Elimina una ruta específica por su ID."
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Productos",
+            "item": [
+                {
+                    "name": "Obtener Todos los Productos",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/productos",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "productos"]
+                        },
+                        "description": "Obtiene todos los productos."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Crear Nuevo Producto",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/productos",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "productos"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"nombre_producto\":\"Nuevo Producto\",\"codigo_producto\":\"NP-001\",\"precio_unitario\":100.50,\"categoria\":\"Ejemplo\"}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "description": "Crea un nuevo producto."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Eliminar Producto",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/productos/{{productoId}}",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "productos", "{{productoId}}"]
+                        },
+                        "description": "Elimina un producto específico por su ID."
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Pedidos",
+            "item": [
+                {
+                    "name": "Obtener Todos los Pedidos",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/pedidos",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "pedidos"]
+                        },
+                        "description": "Obtiene todos los pedidos."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Obtener Pedido por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/pedidos/{{pedidoId}}",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "pedidos", "{{pedidoId}}"]
+                        },
+                        "description": "Obtiene un pedido específico por su ID."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Crear Nuevo Pedido",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/pedidos",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "pedidos"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"cliente_id\": 1, \"ruta_id\": 1, \"fecha_entrega\": \"2025-08-30T10:00:00\", \"estado_pedido\": \"Pendiente\", \"observaciones\": \"Urgente\", \"productos\": [{\"producto_id\": 1, \"cantidad\": 2, \"precio_unitario\": 100}]}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "description": "Crea un nuevo pedido."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar Pedido",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/pedidos/{{pedidoId}}",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "pedidos", "{{pedidoId}}"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"cliente_id\": 1, \"ruta_id\": 5, \"fecha_entrega\": \"2025-08-24T17:44:15.923Z\", \"estado_pedido\": \"Entregado\", \"observaciones\": \"na\", \"productos\": [{\"producto_id\": 1, \"cantidad\": 10, \"precio_unitario\": 15.50}]}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "description": "Actualiza un pedido específico por su ID."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar Detalle de Pedido",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/pedidos/detalles/{{detalleId}}",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "pedidos", "detalles", "{{detalleId}}"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"cantidad\": 3, \"precio_unitario\": 150.00}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "description": "Actualiza un detalle de pedido específico por su ID."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Eliminar Detalle de Pedido",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/pedidos/detalles/{{detalleId}}",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "pedidos", "detalles", "{{detalleId}}"]
+                        },
+                        "description": "Elimina un detalle de pedido específico por su ID."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Eliminar Pedido",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/pedidos/{{pedidoId}}",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "pedidos", "{{pedidoId}}"]
+                        },
+                        "description": "Elimina un pedido específico por su ID."
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Reportes",
+            "item": [
+                {
+                    "name": "Entregas Pendientes",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/reportes/entregas-pendientes?pagina=1&tamano_pagina=30",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "reportes", "entregas-pendientes"],
+                            "query": [
+                                {
+                                    "key": "pagina",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "tamano_pagina",
+                                    "value": "30"
+                                }
+                            ]
+                        },
+                        "description": "Obtiene un reporte de entregas pendientes."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Entregas Completadas",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseURL}}/api/reportes/entregas-completadas?pagina=1&tamano_pagina=40",
+                            "host": ["{{baseURL}}"],
+                            "path": ["api", "reportes", "entregas-completadas"],
+                            "query": [
+                                {
+                                    "key": "pagina",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "tamano_pagina",
+                                    "value": "40"
+                                }
+                            ]
+                        },
+                        "description": "Obtiene un reporte de entregas completadas."
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseURL",
+            "value": "https://localhost:7036",
+            "description": "Base URL of the API for testing"
+        },
+        {
+            "key": "clienteId",
+            "value": "1",
+            "description": "ID of the client for testing"
+        },
+        {
+            "key": "pedidoId",
+            "value": "1",
+            "description": "ID of the order for testing"
+        },
+        {
+            "key": "rutaId",
+            "value": "1",
+            "description": "ID of the delivery route for testing"
+        },
+        {
+            "key": "productoId",
+            "value": "1",
+            "description": "ID of the product for testing"
+        },
+        {
+            "key": "detalleId",
+            "value": "1",
+            "description": "ID of the order detail for testing"
+        }
+    ]
+}
