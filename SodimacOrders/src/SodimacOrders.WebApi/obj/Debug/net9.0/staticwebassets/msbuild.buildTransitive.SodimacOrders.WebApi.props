@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\SodimacOrders.WebApi.props" />
+</Project>

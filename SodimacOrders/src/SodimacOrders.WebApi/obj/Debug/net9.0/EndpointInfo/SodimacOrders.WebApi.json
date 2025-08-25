@@ -1,0 +1,1993 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "SodimacOrders API",
+    "description": "API for managing orders in Sodimac",
+    "contact": {
+      "name": "Development Team",
+      "email": "dev@sodimac.com"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDtoApiResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDtoApiResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDtoApiResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDtoApiResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDtoApiResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDtoApiResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDtoApiResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDtoApiResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDtoApiResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Clientes": {
+      "get": {
+        "tags": [
+          "Clientes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cliente"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cliente"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cliente"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Clientes/{id}": {
+      "get": {
+        "tags": [
+          "Clientes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cliente"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cliente"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cliente"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Pedidos": {
+      "get": {
+        "tags": [
+          "Pedidos"
+        ],
+        "parameters": [
+          {
+            "name": "cliente_id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "estado_pedido",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ruta_id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "fecha_desde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "fecha_hasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "valor_minimo",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "valor_maximo",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "tamano_pagina",
+            "in": "query",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ordenar_por",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "direccion_orden",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filtro_busqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoResponseDtoRespuestaPaginada"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Pedidos"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPedidoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPedidoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPedidoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Pedidos/{id}": {
+      "get": {
+        "tags": [
+          "Pedidos"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Pedidos"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActualizarPedidoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActualizarPedidoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActualizarPedidoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Pedidos"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Pedidos/{id}/estado": {
+      "get": {
+        "tags": [
+          "Pedidos"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstadoPedidoResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Pedidos"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActualizarEstadoPedidoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActualizarEstadoPedidoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActualizarEstadoPedidoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Pedidos/{id}/asignar-ruta": {
+      "patch": {
+        "tags": [
+          "Pedidos"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsignarRutaDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsignarRutaDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsignarRutaDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Productos": {
+      "get": {
+        "tags": [
+          "Productos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Producto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Producto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Producto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Productos/{id}": {
+      "get": {
+        "tags": [
+          "Productos"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Producto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Producto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Producto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Reportes/entregas-pendientes": {
+      "get": {
+        "tags": [
+          "Reportes"
+        ],
+        "parameters": [
+          {
+            "name": "fecha_entrega_desde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "fecha_entrega_hasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "ruta_id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nombre_cliente",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "valor_minimo",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "tamano_pagina",
+            "in": "query",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ordenar_por",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "direccion_orden",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filtro_busqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReporteEntregasPendientesDtoRespuestaPaginada"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Reportes/entregas-completadas": {
+      "get": {
+        "tags": [
+          "Reportes"
+        ],
+        "parameters": [
+          {
+            "name": "fecha_entrega_desde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "fecha_entrega_hasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "ruta_id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nombre_cliente",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "valor_minimo",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "tamano_pagina",
+            "in": "query",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ordenar_por",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "direccion_orden",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filtro_busqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReporteEntregasCompletadasDtoRespuestaPaginada"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/Reportes/dashboard": {
+      "get": {
+        "tags": [
+          "Reportes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/RutaEntrega/activas": {
+      "get": {
+        "tags": [
+          "RutaEntrega"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RutaEntrega"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RutaEntrega"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RutaEntrega"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActualizarEstadoPedidoDto": {
+        "required": [
+          "estado_pedido"
+        ],
+        "type": "object",
+        "properties": {
+          "estado_pedido": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string"
+          },
+          "ruta_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "observaciones": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActualizarPedidoDto": {
+        "required": [
+          "cliente_id",
+          "estado_pedido",
+          "fecha_entrega",
+          "productos"
+        ],
+        "type": "object",
+        "properties": {
+          "cliente_id": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "ruta_id": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fecha_entrega": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "estado_pedido": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "observaciones": {
+            "maxLength": 1000,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "productos": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetallePedidoDto"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "AsignarRutaDto": {
+        "required": [
+          "ruta_id"
+        ],
+        "type": "object",
+        "properties": {
+          "ruta_id": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "observaciones": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Cliente": {
+        "required": [
+          "direccion",
+          "email",
+          "nombre"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "direccion": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
+          },
+          "fecha_creacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "pedidos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Pedido"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearPedidoDto": {
+        "required": [
+          "cliente_id",
+          "fecha_entrega",
+          "productos"
+        ],
+        "type": "object",
+        "properties": {
+          "cliente_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fecha_entrega": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ruta_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "observaciones": {
+            "type": "string",
+            "nullable": true
+          },
+          "productos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetallePedidoDto"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "DetallePedido": {
+        "required": [
+          "cantidad",
+          "pedidoId",
+          "productoId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pedidoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cantidad": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "precioUnitario": {
+            "type": "number",
+            "format": "double"
+          },
+          "subtotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "pedido": {
+            "$ref": "#/components/schemas/Pedido"
+          },
+          "producto": {
+            "$ref": "#/components/schemas/Producto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DetallePedidoDto": {
+        "required": [
+          "cantidad",
+          "precio_unitario",
+          "producto_id"
+        ],
+        "type": "object",
+        "properties": {
+          "producto_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cantidad": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "precio_unitario": {
+            "minimum": 0,01,
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DetallePedidoResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "producto_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre_producto": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigo_producto": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantidad": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "precio_unitario": {
+            "type": "number",
+            "format": "double"
+          },
+          "subtotal": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstadoPedidoResponseDto": {
+        "type": "object",
+        "properties": {
+          "pedido_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estado_actual": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha_pedido": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fecha_entrega_programada": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fecha_ultima_actualizacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ruta_asignada": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nombre_ruta": {
+            "type": "string",
+            "nullable": true
+          },
+          "observaciones": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InfoPaginacion": {
+        "type": "object",
+        "properties": {
+          "desde": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasta": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mostrando": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginRequestDto": {
+        "required": [
+          "contraseña",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
+          },
+          "contraseña": {
+            "minLength": 6,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginResponseDto": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserInfoDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginResponseDtoApiResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/LoginResponseDto"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Pedido": {
+        "required": [
+          "cliente_id",
+          "estado_pedido",
+          "fecha_entrega"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cliente_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ruta_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fecha_pedido": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fecha_entrega": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "estado_pedido": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string"
+          },
+          "valor_total": {
+            "type": "number",
+            "format": "double"
+          },
+          "observaciones": {
+            "maxLength": 1000,
+            "type": "string",
+            "nullable": true
+          },
+          "fecha_actualizacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
+          },
+          "rutaEntrega": {
+            "$ref": "#/components/schemas/RutaEntrega"
+          },
+          "productos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetallePedido"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PedidoResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cliente_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre_cliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion_cliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "email_cliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "ruta_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nombre_ruta": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha_pedido": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fecha_entrega": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "estado_pedido": {
+            "type": "string",
+            "nullable": true
+          },
+          "valor_total": {
+            "type": "number",
+            "format": "double"
+          },
+          "observaciones": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha_actualizacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "productos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetallePedidoResponseDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PedidoResponseDtoRespuestaPaginada": {
+        "type": "object",
+        "properties": {
+          "datos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PedidoResponseDto"
+            },
+            "nullable": true
+          },
+          "pagina_actual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tamano_pagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total_registros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total_paginas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tiene_pagina_anterior": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "tiene_pagina_siguiente": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "enlace_pagina_anterior": {
+            "type": "string",
+            "nullable": true
+          },
+          "enlace_pagina_siguiente": {
+            "type": "string",
+            "nullable": true
+          },
+          "enlace_primera_pagina": {
+            "type": "string",
+            "nullable": true
+          },
+          "enlace_ultima_pagina": {
+            "type": "string",
+            "nullable": true
+          },
+          "info_paginacion": {
+            "$ref": "#/components/schemas/InfoPaginacion"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "Producto": {
+        "required": [
+          "codigo_producto",
+          "nombre_producto"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre_producto": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "codigo_producto": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string"
+          },
+          "precio_unitario": {
+            "type": "number",
+            "format": "double"
+          },
+          "categoria": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "detallesPedidos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetallePedido"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReporteEntregasCompletadasDto": {
+        "type": "object",
+        "properties": {
+          "pedido_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre_cliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion_entrega": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha_pedido": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fecha_entrega": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "valor_total": {
+            "type": "number",
+            "format": "double"
+          },
+          "nombre_ruta": {
+            "type": "string",
+            "nullable": true
+          },
+          "total_productos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total_items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReporteEntregasCompletadasDtoRespuestaPaginada": {
+        "type": "object",
+        "properties": {
+          "datos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReporteEntregasCompletadasDto"
+            },
+            "nullable": true
+          },
+          "pagina_actual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tamano_pagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total_registros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total_paginas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tiene_pagina_anterior": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "tiene_pagina_siguiente": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "enlace_pagina_anterior": {
+            "type": "string",
+            "nullable": true
+          },
+          "enlace_pagina_siguiente": {
+            "type": "string",
+            "nullable": true
+          },
+          "enlace_primera_pagina": {
+            "type": "string",
+            "nullable": true
+          },
+          "enlace_ultima_pagina": {
+            "type": "string",
+            "nullable": true
+          },
+          "info_paginacion": {
+            "$ref": "#/components/schemas/InfoPaginacion"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReporteEntregasPendientesDto": {
+        "type": "object",
+        "properties": {
+          "pedido_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre_cliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion_entrega": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha_entrega": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "valor_total": {
+            "type": "number",
+            "format": "double"
+          },
+          "nombre_ruta": {
+            "type": "string",
+            "nullable": true
+          },
+          "dias_para_entrega": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReporteEntregasPendientesDtoRespuestaPaginada": {
+        "type": "object",
+        "properties": {
+          "datos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReporteEntregasPendientesDto"
+            },
+            "nullable": true
+          },
+          "pagina_actual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tamano_pagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total_registros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total_paginas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tiene_pagina_anterior": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "tiene_pagina_siguiente": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "enlace_pagina_anterior": {
+            "type": "string",
+            "nullable": true
+          },
+          "enlace_pagina_siguiente": {
+            "type": "string",
+            "nullable": true
+          },
+          "enlace_primera_pagina": {
+            "type": "string",
+            "nullable": true
+          },
+          "enlace_ultima_pagina": {
+            "type": "string",
+            "nullable": true
+          },
+          "info_paginacion": {
+            "$ref": "#/components/schemas/InfoPaginacion"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RutaEntrega": {
+        "required": [
+          "estado",
+          "nombre_ruta"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre_ruta": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "estado": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string"
+          },
+          "capacidad_maxima": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fecha_creacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "pedidos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Pedido"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserInfoDto": {
+        "type": "object",
+        "properties": {
+          "idUsuario": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "fechaUltimoAcceso": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "activo": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT Authorization header using the Bearer scheme. \r\n                      Enter 'Bearer' [space] and then your token in the text input below.\r\n                      Example: 'Bearer 12345abcdef'",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

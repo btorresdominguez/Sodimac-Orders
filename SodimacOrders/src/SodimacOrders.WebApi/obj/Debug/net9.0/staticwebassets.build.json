@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "iLiAB597oHDsue6mqRawLS9ejveyV2pqzM7NCex6ycw=",
+  "Source": "SodimacOrders.WebApi",
+  "BasePath": "_content/SodimacOrders.WebApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
