@@ -1,0 +1,23 @@
+[
+  {
+    "Name": "Nuevo perfil",
+    "Projects": [
+      {
+        "Path": "src\\SodimacOrders.Domain\\SodimacOrders.Domain.csproj",
+        "Action": "StartWithoutDebugging"
+      },
+      {
+        "Path": "src\\SodimacOrders.Application\\SodimacOrders.Application.csproj",
+        "Action": "StartWithoutDebugging"
+      },
+      {
+        "Path": "src\\SodimacOrders.Infrastructure\\SodimacOrders.Infrastructure.csproj",
+        "Action": "StartWithoutDebugging"
+      },
+      {
+        "Path": "src\\SodimacOrders.WebApi\\SodimacOrders.WebApi.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

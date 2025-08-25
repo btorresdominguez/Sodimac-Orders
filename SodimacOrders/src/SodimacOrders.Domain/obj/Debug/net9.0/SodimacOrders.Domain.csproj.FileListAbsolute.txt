@@ -1,0 +1,14 @@
+D:\SodimacOrders\src\SodimacOrders.Domain\bin\Debug\net9.0\SodimacOrders.Domain.deps.json
+D:\SodimacOrders\src\SodimacOrders.Domain\bin\Debug\net9.0\SodimacOrders.Domain.runtimeconfig.json
+D:\SodimacOrders\src\SodimacOrders.Domain\bin\Debug\net9.0\SodimacOrders.Domain.dll
+D:\SodimacOrders\src\SodimacOrders.Domain\bin\Debug\net9.0\SodimacOrders.Domain.pdb
+D:\SodimacOrders\src\SodimacOrders.Domain\obj\Debug\net9.0\SodimacOrders.Domain.csproj.AssemblyReference.cache
+D:\SodimacOrders\src\SodimacOrders.Domain\obj\Debug\net9.0\SodimacOrders.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\SodimacOrders\src\SodimacOrders.Domain\obj\Debug\net9.0\SodimacOrders.Domain.AssemblyInfoInputs.cache
+D:\SodimacOrders\src\SodimacOrders.Domain\obj\Debug\net9.0\SodimacOrders.Domain.AssemblyInfo.cs
+D:\SodimacOrders\src\SodimacOrders.Domain\obj\Debug\net9.0\SodimacOrders.Domain.csproj.CoreCompileInputs.cache
+D:\SodimacOrders\src\SodimacOrders.Domain\obj\Debug\net9.0\SodimacOrders.Domain.dll
+D:\SodimacOrders\src\SodimacOrders.Domain\obj\Debug\net9.0\refint\SodimacOrders.Domain.dll
+D:\SodimacOrders\src\SodimacOrders.Domain\obj\Debug\net9.0\SodimacOrders.Domain.pdb
+D:\SodimacOrders\src\SodimacOrders.Domain\obj\Debug\net9.0\SodimacOrders.Domain.genruntimeconfig.cache
+D:\SodimacOrders\src\SodimacOrders.Domain\obj\Debug\net9.0\ref\SodimacOrders.Domain.dll

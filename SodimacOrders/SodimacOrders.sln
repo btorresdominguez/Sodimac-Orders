@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D860B364-B0FE-4031-90AA-15A5CE4642A5}"
+	ProjectSection(SolutionItems) = preProject
+		src\Dockerfile = src\Dockerfile
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SodimacOrders.Domain", "src\SodimacOrders.Domain\SodimacOrders.Domain.csproj", "{6F71771B-63E3-4E80-87B6-C5ECC33731C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SodimacOrders.Application", "src\SodimacOrders.Application\SodimacOrders.Application.csproj", "{497861CE-3F8E-40A7-899D-13C14CD83F2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SodimacOrders.Infrastructure", "src\SodimacOrders.Infrastructure\SodimacOrders.Infrastructure.csproj", "{0B5FC0A6-BD80-4778-9835-7909D949B0F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SodimacOrders.WebApi", "src\SodimacOrders.WebApi\SodimacOrders.WebApi.csproj", "{A4E0CC74-F850-415F-BD6C-5414C7D3DE42}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SodimacOrders.Tests", "SodimacOrders.Tests", "{93A60880-F474-4616-BCD1-E30077584B05}"
+	ProjectSection(SolutionItems) = preProject
+		SodimacOrders.Tests\PedidosControllerTests.cs = SodimacOrders.Tests\PedidosControllerTests.cs
+		SodimacOrders.Tests\SodimacOrders.Tests.csproj = SodimacOrders.Tests\SodimacOrders.Tests.csproj
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F71771B-63E3-4E80-87B6-C5ECC33731C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F71771B-63E3-4E80-87B6-C5ECC33731C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F71771B-63E3-4E80-87B6-C5ECC33731C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F71771B-63E3-4E80-87B6-C5ECC33731C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{497861CE-3F8E-40A7-899D-13C14CD83F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{497861CE-3F8E-40A7-899D-13C14CD83F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{497861CE-3F8E-40A7-899D-13C14CD83F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{497861CE-3F8E-40A7-899D-13C14CD83F2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B5FC0A6-BD80-4778-9835-7909D949B0F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B5FC0A6-BD80-4778-9835-7909D949B0F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B5FC0A6-BD80-4778-9835-7909D949B0F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B5FC0A6-BD80-4778-9835-7909D949B0F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4E0CC74-F850-415F-BD6C-5414C7D3DE42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4E0CC74-F850-415F-BD6C-5414C7D3DE42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4E0CC74-F850-415F-BD6C-5414C7D3DE42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4E0CC74-F850-415F-BD6C-5414C7D3DE42}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6F71771B-63E3-4E80-87B6-C5ECC33731C6} = {D860B364-B0FE-4031-90AA-15A5CE4642A5}
+		{497861CE-3F8E-40A7-899D-13C14CD83F2B} = {D860B364-B0FE-4031-90AA-15A5CE4642A5}
+		{0B5FC0A6-BD80-4778-9835-7909D949B0F0} = {D860B364-B0FE-4031-90AA-15A5CE4642A5}
+		{A4E0CC74-F850-415F-BD6C-5414C7D3DE42} = {D860B364-B0FE-4031-90AA-15A5CE4642A5}
+	EndGlobalSection
+EndGlobal

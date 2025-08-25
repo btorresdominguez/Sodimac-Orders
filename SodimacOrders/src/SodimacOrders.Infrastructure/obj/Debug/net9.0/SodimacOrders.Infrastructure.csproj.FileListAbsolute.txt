@@ -1,0 +1,17 @@
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\bin\Debug\net9.0\SodimacOrders.Infrastructure.deps.json
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\bin\Debug\net9.0\SodimacOrders.Infrastructure.dll
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\bin\Debug\net9.0\SodimacOrders.Infrastructure.pdb
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\bin\Debug\net9.0\SodimacOrders.Application.dll
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\bin\Debug\net9.0\SodimacOrders.Domain.dll
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\bin\Debug\net9.0\SodimacOrders.Application.pdb
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\bin\Debug\net9.0\SodimacOrders.Domain.pdb
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\obj\Debug\net9.0\SodimacOrders.Infrastructure.csproj.AssemblyReference.cache
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\obj\Debug\net9.0\SodimacOrders.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\obj\Debug\net9.0\SodimacOrders.Infrastructure.AssemblyInfoInputs.cache
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\obj\Debug\net9.0\SodimacOrders.Infrastructure.AssemblyInfo.cs
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\obj\Debug\net9.0\SodimacOrders.Infrastructure.csproj.CoreCompileInputs.cache
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\obj\Debug\net9.0\SodimacO.7D8681DE.Up2Date
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\obj\Debug\net9.0\SodimacOrders.Infrastructure.dll
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\obj\Debug\net9.0\refint\SodimacOrders.Infrastructure.dll
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\obj\Debug\net9.0\SodimacOrders.Infrastructure.pdb
+D:\SodimacOrders\src\SodimacOrders.Infrastructure\obj\Debug\net9.0\ref\SodimacOrders.Infrastructure.dll
